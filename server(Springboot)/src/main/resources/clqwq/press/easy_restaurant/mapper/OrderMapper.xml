@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Restaurant表格的SQL集合-->
+<mapper namespace="clqwq.press.easy_restaurant.mapper.OrderMapper">
+
+    <insert id="insertOneDineInOrder">
+        insert into dine_in_order(oid, rid, tid, start_time,  dishes, state, price)
+        values(#{oid}, #{rid}, #{tid}, date_format(now(), '%Y-%m-%d'), #{dishes_}, #{state}, #{price})
+    </insert>
+
+    <insert id="insertOneTakeOutOrder">
+        insert into take_out_table(oid, tel, rid, dishes, state, start_time, finish_time, location)
+        values(#{oid}, #{tel}, #{rid}, #{dishes_}, #{state}, #{start_time}, #{finish_time}, #{location})
+    </insert>
+
+    <update id="changeDineInOrder">
+        update dine_in_order
+            set dishes = #{dishes_}, price = #{price}
+            where oid = #{oid}
+    </update>
+
+    <update id="changDineInOrderState">
+        update dine_in_order
+            set state = #{state}, finish_time = date_format(now(), '%Y-%m-%d')
+            where oid = #{oid}
+    </update>
+
+    <update id="changTakeOutOrderState">
+        update take_out_order
+        set state = #{state}
+        where oid = #{oid}
+    </update>
+
+
+    <select id="getAllDineInOrders" resultType="java.util.HashMap">
+        select * from dine_in_order where rid = #{rid}
+    </select>
+
+    <select id="getAllTakeOutOrders" resultType="java.util.HashMap">
+        select * from take_out_order where rid = #{rid}
+    </select>
+
+    <select id="getDiningOrder" resultType="java.util.HashMap">
+        select * from dine_in_order where state = 1 and rid = #{rid} and tid = #{tid}
+    </select>
+
+    <select id="getNextDineInID" resultType="String">
+        select max(oid) from dine_in_order
+    </select>
+
+    <select id="getNextTakeOutID" resultType="String">
+        select max(oid) from take_out_order
+    </select>
+
+</mapper>

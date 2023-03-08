@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Restaurant表格的SQL集合-->
+<mapper namespace="clqwq.press.easy_restaurant.mapper.DishMapper">
+
+    <insert id="insertOneDish">
+        insert into dish(did, name, price, comment, materials, format, rid, valid, taste)
+        values (#{did}, #{name}, #{price}, #{comment}, #{materials_}, #{format}, #{rid}, 1, #{taste});
+        unlock tables;
+    </insert>
+
+    <update id="changeDish">
+        update dish
+            set name = #{name}, price = #{price}, comment = #{comment}, materials = #{materials_}, format = #{format}, rid = #{rid}
+            where did = #{did};
+    </update>
+
+    <update id="deleteDish">
+        update dish
+            set valid = 0
+            where did = #{did}
+    </update>
+
+
+    <select id="getAllDishes" resultType="java.util.HashMap">
+        select * from dish_meta where rid = #{rid}
+    </select>
+
+    <select id="getNextID" resultType="java.lang.String">
+--         对表格加读锁
+--         lock table dish read;
+--         lock table dish write;
+        select max(did) from dish;
+    </select>
+
+
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Restaurant表格的SQL集合-->
+<mapper namespace="clqwq.press.easy_restaurant.mapper.VerificationMapper">
+
+
+    <insert id="insertVerification">
+        insert into verification(tel, code, time, type)
+        values (#{tel}, #{code}, now(), #{type})
+    </insert>
+
+    <select id="checkVerification" resultType="clqwq.press.easy_restaurant.entity.Verification">
+        select code
+            from verification
+            where tel = #{tel}
+            and type = #{type}
+            and code = #{code}
+            and time between date_add(now(), interval - 5 minute) and now()
+    </select>
+
+</mapper>

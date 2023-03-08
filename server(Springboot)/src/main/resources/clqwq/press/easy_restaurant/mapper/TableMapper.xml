@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Restaurant表格的SQL集合-->
+<mapper namespace="clqwq.press.easy_restaurant.mapper.TableMapper">
+
+    <insert id="insertOneTable">
+        insert into table_(tid, rid, location, num)
+            rid = #{tid}, #{rid}, #{location}, #{num}
+    </insert>
+
+    <update id="changeOneTable">
+        update table_
+            set location = #{location}, num = #{num}
+    </update>
+
+    <delete id="deleteOneTable">
+        delete from table_ where tid = #{tid}, rid = #{rid}
+    </delete>
+
+
+    <select id="getAllTable" resultType="clqwq.press.easy_restaurant.entity.Table">
+        select * from table_meta where rid = #{rid}
+    </select>
+
+</mapper>

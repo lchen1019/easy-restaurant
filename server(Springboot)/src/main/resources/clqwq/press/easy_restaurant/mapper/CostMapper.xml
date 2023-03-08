@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Restaurant表格的SQL集合-->
+<mapper namespace="clqwq.press.easy_restaurant.mapper.CostMapper">
+
+    <select id="getCost" resultType="clqwq.press.easy_restaurant.entity.Cost">
+        select rid, total_cost as totalCost, utility_bill as utilityBill, rent, other,
+               total_salary as totalSalary, total_sales as totalSales, total_profit as totalProfit
+        from cost where rid = #{rid}
+    </select>
+
+</mapper>

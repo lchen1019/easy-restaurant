@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="clqwq.press.easy_restaurant.mapper.EmployeeMapper">
+
+
+    <insert id="insertOneEmployee">
+        insert into employee(eid, name, home, rid, buyer, server, manager, sex, salary, password, valid, entry_time)
+        values(#{eid}, #{name}, #{home}, #{rid}, 1, 1, 1, #{sex}, #{salary}, #{password}, 1, date_format(now(), "%y-%m-%d"))
+    </insert>
+
+    <update id="changeEmployee">
+        update employee set name = #{name}, home = #{home}, sex = #{sex}, salary = #{salary}
+            where eid = #{eid}
+    </update>
+
+    <update id="changePassword">
+        update employee set password = #{password} where eid = #{eid}
+    </update>
+
+    <update id="changePermission">
+        update employee set buyer = #{buyer}, server = #{server}, manager = #{manager}
+            where eid = #{eid}
+    </update>
+
+    <update id="deleteEmployee">
+        update employee set valid = 0 where eid = #{eid}
+    </update>
+
+    <select id="getAllEmployee" resultType="clqwq.press.easy_restaurant.entity.Employee">
+        select * from employee where rid = #{rid} and valid = 1
+    </select>
+
+    <select id="getEmployee" resultType="clqwq.press.easy_restaurant.entity.Employee">
+        select * from employee where eid = #{eid}
+    </select>
+
+    <select id="checkPassword" resultType="clqwq.press.easy_restaurant.entity.Employee">
+        select * from employee where eid = #{eid} and password = #{password}
+    </select>
+
+
+</mapper>

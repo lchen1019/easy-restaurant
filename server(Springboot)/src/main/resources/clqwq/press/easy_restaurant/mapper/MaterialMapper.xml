@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Restaurant表格的SQL集合-->
+<mapper namespace="clqwq.press.easy_restaurant.mapper.MaterialMapper">
+
+    <insert id="insertOneMaterial">
+        insert into material(mid, name, price, measure, total, rid, format, valid)
+            values(#{mid}, #{name}, #{price}, #{measure}, #{total}, #{rid}, #{format}, 1)
+    </insert>
+
+    <update id="changeMaterial">
+        update material
+            set name = #{name}, price = #{price}, measure = #{measure}, total = #{total}, rid = #{rid}
+            where mid = #{mid}
+    </update>
+
+    <update id="deleteMaterial">
+        update material
+            set valid = 0
+            where mid = #{mid}
+    </update>
+
+
+    <select id="getAllMaterials" resultType="clqwq.press.easy_restaurant.entity.Material">
+        select * from material_meta where rid = #{rid}
+    </select>
+
+    <select id="getNextID" resultType="java.lang.String">
+        select max(mid) from material
+    </select>
+
+    <select id="checkMaterial" resultType="java.lang.Double">
+        select min(remain) from material_meta where rid = #{rid}
+    </select>
+
+</mapper>

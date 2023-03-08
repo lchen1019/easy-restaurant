@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!--MySQL的连接信息-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/easy_restaurant?allowMultiQueries=true"/>
+                <property name="username" value="root"/>
+                <property name="password" value="wl2002914"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--SQL的映射文件-->
+        <mapper class="clqwq.press.easy_restaurant.mapper.RestaurantMapper"/>
+        <mapper class="clqwq.press.easy_restaurant.mapper.VerificationMapper"/>
+        <mapper class="clqwq.press.easy_restaurant.mapper.DishMapper"/>
+        <mapper class="clqwq.press.easy_restaurant.mapper.MaterialMapper"/>
+        <mapper class="clqwq.press.easy_restaurant.mapper.OrderMapper"/>
+        <mapper class="clqwq.press.easy_restaurant.mapper.TableMapper"/>
+        <mapper class="clqwq.press.easy_restaurant.mapper.EmployeeMapper"/>
+        <mapper class="clqwq.press.easy_restaurant.mapper.CostMapper"/>
+        <mapper class="clqwq.press.easy_restaurant.mapper.ExceptionMapper"/>
+        <mapper class="clqwq.press.easy_restaurant.mapper.MakeMapper"/>
+        <mapper class="clqwq.press.easy_restaurant.mapper.HaveMapper"/>
+    </mappers>
+</configuration>

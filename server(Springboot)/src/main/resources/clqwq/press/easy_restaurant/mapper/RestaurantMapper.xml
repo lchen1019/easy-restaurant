@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Restaurant表格的SQL集合-->
+<mapper namespace="clqwq.press.easy_restaurant.mapper.RestaurantMapper">
+
+    <insert id="register">
+        insert into restaurant(rid, name, administrator, utility_bill, rent, other)
+        values (#{rid}, #{name}, #{administrator}, 0, 0, 0)
+    </insert>
+
+    <update id="changeRestaurantInfo">
+        update restaurant
+            set name = #{name}, location = #{location}
+            where rid = #{rid}
+    </update>
+
+    <update id="changeRestaurantFee">
+        update restaurant
+            set utility_bill = #{utilityBill}, rent = #{rent}, other = #{other}
+            where rid = #{rid}
+    </update>
+
+    <select id="getNextID" resultType="java.lang.String">
+        select max(rid) from restaurant
+    </select>
+
+    <select id="getRestaurantMeta" resultType="clqwq.press.easy_restaurant.entity.RestaurantMeta">
+        select rid, name, location, tel, total_dish as totalDish, total_material as totalMaterial,
+            total_order as totalOrder, total_score as totalScore, total_employee as totalEmplpyee,
+               total_num as totalNum, total_table as totalTable
+            from restaurant_meta where rid = #{rid}
+    </select>
+
+</mapper>
